@@ -1,5 +1,6 @@
 resource "openstack_networking_router_v2" "rt01" {
-  external_gateway = "03670b37-8304-4518-9cfa-9ff17d197e12"
+  name = "${var.openstack_user_name}-rt01"
+  external_gateway = "${var.openstack_folating_ip_subnet_id}"
 }
 
 resource "openstack_networking_router_interface_v2" "rt01-interface-01" {
