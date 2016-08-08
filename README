@@ -1,0 +1,9 @@
+
+small_infra
+
+    Creates secgroup
+            netwrok 
+            subnet
+            router
+            instances 
+            

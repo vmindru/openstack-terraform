@@ -16,8 +16,8 @@ variable "openstack_subnet_cidr" {
     default = ""
 }
 
-variable "openstack_floating_ip_subnet_id" {
-    description = "The UUID of the floating subnet, this will be added to the router"
+variable "openstack_gateway_network_id" {
+    description = "The UUID of the floating network, this will be used to  add gateway to the router"
     default = ""
 }
 
@@ -30,9 +30,12 @@ variable "openstack_floating_ip_pool" {
 
 # INSTANCE DETAILS 
 
+variable "openstack_instance_count" {
+    description = "how many instances do you want to create?"
+}
+
 variable "openstack_instance_name" {
     description = "instance name , or instance name prefix in case we will be spawning multiple instances"
-    default = ""
 }
 
 variable "openstack_instance_image_id" {
@@ -40,7 +43,7 @@ variable "openstack_instance_image_id" {
     default = ""
 }
 
-variable "openstack_instance_favor_id" {
+variable "openstack_instance_flavor_id" {
     description = "flavor of instance we want to start, get with openstack flavor list"
     default = ""
 }
