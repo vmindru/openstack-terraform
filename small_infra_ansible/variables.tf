@@ -13,18 +13,16 @@ variable "openstack_auth_url" {}
 # NETWORK VARS 
 variable "openstack_subnet_cidr" {
     description = "Subnet Cidr"
-    default = ""
+    default = "172.17.100.0/24"
 }
 
 variable "openstack_gateway_network_id" {
     description = "The UUID of the floating network, this will be used to  add gateway to the router"
-    default = ""
 }
 
 variable "openstack_floating_ip_pool" {
     type = "string"
     description = "floating IP pool name, must be seted same as openstack_floating_ip_subnet_id"
-    default = ""
 }
 
 
@@ -40,23 +38,29 @@ variable "openstack_instance_name" {
 
 variable "openstack_instance_image_id" {
     description = "image to boot the instance off, default RHEL-7.2-Server-x86_64-latest, obtain by  running openstack image list or nova image-list"
-    default = ""
 }
 
 variable "openstack_instance_flavor_id" {
     description = "flavor of instance we want to start, get with openstack flavor list"
-    default = ""
 }
 
 variable "openstack_instance_key_pair" {
     description = "keypair you want to use for this instance"
-    default = ""
 }
 
 # FLOATING IP's
 
+# ANSIBLE VARS 
+variable "ansible_plyabook_path" { 
+    description = "path to the playbook you want to run"
+}
 
+variable "root_password" {
+    description = "root password, used to login to fresh created VM's"
+}
 
-
+variable "ansible_private_key" {
+    description = "full path to your SSH private key, used to connect to the host"
+}
 
 

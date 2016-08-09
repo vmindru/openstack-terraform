@@ -2,7 +2,7 @@
 # bellow can be replaced wiht flavor_name ,  this would lookup the desired flavor_id and is more dynamic solution
 
 resource "openstack_compute_keypair_v2" "keypair" {
-  name = "${var.openstack_user_name}-keypair"
+  name = "${var.openstack_user_name}-ansible-keypair"
   public_key = "${var.openstack_instance_key_pair}"
 }
 
@@ -17,6 +17,27 @@ resource "openstack_compute_instance_v2" "test-vm" {
   key_pair = "${openstack_compute_keypair_v2.keypair.name}"
   security_groups = ["${openstack_compute_secgroup_v2.secgroup01.name}"]
   depends_on = ["openstack_networking_router_v2.rt01","openstack_networking_router_interface_v2.rt01-interface-01"]
+
+  provisioner "remote-exec" {
+        inline = [
+        "mkdir ~/.ssh",
+        "chmod 600 ~/.ssh",
+        "echo ${var.openstack_instance_key_pair} > ~/.ssh/authorized_keys ",,
+        "chmod 600 ~/.ssh/authorized_keys"
+        ]
+    
+        connection {
+            user = "root"
+            password = "${var.root_password}"
+        }
+  }
+
+  provisioner "local-exec" {
+      command = "ansible-playbook --private-key ${var.ansible_private_key} -i '${element(openstack_compute_floatingip_v2.test-vm.*.address, count.index)},'  -s ${var.ansible_plyabook_path} -T 300 -u root"
+  }
+
+
+
 }
 
 resource "openstack_compute_floatingip_v2" "test-vm" {

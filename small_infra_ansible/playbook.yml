@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: install httpd
+      yum: name=httpd update_cache=yes state=latest
+
+    - name: restart httpd
+      service: name=httpd state=restarted enabled=yes
