@@ -4,6 +4,7 @@
 */terraform.tfvars
 terraform.tfvars
 *.tfvars
+*.retry
 
 
 
