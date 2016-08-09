@@ -22,7 +22,7 @@ resource "openstack_compute_instance_v2" "test-vm" {
         inline = [
         "mkdir ~/.ssh",
         "chmod 600 ~/.ssh",
-        "echo ${var.openstack_instance_key_pair} > ~/.ssh/authorized_keys ",,
+        "echo ${var.openstack_instance_key_pair} >> ~/.ssh/authorized_keys ",,
         "chmod 600 ~/.ssh/authorized_keys"
         ]
     

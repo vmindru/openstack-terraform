@@ -17,6 +17,20 @@ resource "openstack_compute_instance_v2" "test-vm" {
   key_pair = "${openstack_compute_keypair_v2.keypair.name}"
   security_groups = ["${openstack_compute_secgroup_v2.secgroup01.name}"]
   depends_on = ["openstack_networking_router_v2.rt01","openstack_networking_router_interface_v2.rt01-interface-01"]
+
+  provisioner "remote-exec" {
+        inline = [
+        "mkdir ~/.ssh",
+        "chmod 600 ~/.ssh",
+        "echo ${var.openstack_instance_key_pair} >> ~/.ssh/authorized_keys ",,
+        "chmod 600 ~/.ssh/authorized_keys"
+        ]
+
+        connection {
+            user = "root"
+            password = "${var.root_password}"
+        }
+  }
 }
 
 resource "openstack_compute_floatingip_v2" "test-vm" {
