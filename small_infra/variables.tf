@@ -55,7 +55,10 @@ variable "openstack_instance_key_pair" {
 
 # FLOATING IP's
 
-
+# ANSIBLE
+variable "root_password" {
+    description = "root password, used to log into VM's"
+}
 
 
 

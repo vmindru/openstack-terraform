@@ -1,8 +1,23 @@
 ---
 - hosts: all
   tasks:
-    - name: install httpd
-      yum: name=httpd update_cache=yes state=latest
+    - name: install LIBVIRT
+      yum: name={{ item }} update_cache=yes state=latest
+      with_items: 
+          - libvirt-client 
+          - libvirt-daemon 
+          - libvirt-client 
+          - libvirt 
+          - virt-install 
+          - wget 
+          - seabios-bin
+          - libvirt-daemon-kvm
 
-    - name: restart httpd
-      service: name=httpd state=restarted enabled=yes
+    - name: start libvirt
+      service:  name=libvirtd enabled=yes state=started 
+
+    - name: download Cirors http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img 
+      get_url:  url=http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img dest=/tmp/cirros.img
+    
+    - name: install and start CIRROS 
+      shell: virt-install --name=cirros --ram=512 --vcpus=1 --disk path=/tmp/cirros.img,format=qcow2 --import --network network:default --vnc --noautoconsole
