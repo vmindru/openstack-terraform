@@ -1,5 +1,5 @@
 resource "openstack_networking_router_v2" "rt01" {
-  name = "${var.openstack_tenant_name}-rt01"
+  name = "${var.openstack_tenant_name}-${var.rt01}"
   external_gateway = "${var.openstack_gateway_network_id}"
 }
 
