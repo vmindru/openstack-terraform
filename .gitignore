@@ -5,8 +5,7 @@
 terraform.tfvars
 *.tfvars
 *.retry
-
-
+priavte/*
 
 
 # Module directory
