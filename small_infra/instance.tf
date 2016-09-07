@@ -18,6 +18,9 @@ resource "openstack_compute_instance_v2" "test-vm" {
   security_groups = ["${openstack_compute_secgroup_v2.secgroup01.name}"]
   depends_on = ["openstack_networking_router_v2.rt01","openstack_networking_router_interface_v2.rt01-interface-01"]
 
+
+
+# there are cases where the IMAGE does not come with cloud initi scripts, there for we want to provision the SSH key
   provisioner "remote-exec" {
         inline = [
         "mkdir ~/.ssh",
