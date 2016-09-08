@@ -75,6 +75,7 @@ variable "openstack_instance_key_pair" {
 # ANSIBLE VARS 
 variable "ansible_plyabook_path" { 
     description = "path to the playbook you want to run"
+    default = "$HOME"
 }
 
 variable "root_password" {
@@ -83,6 +84,7 @@ variable "root_password" {
 
 variable "ansible_private_key" {
     description = "full path to your SSH private key, used to connect to the host"
+    default = "$HOME/.ssh/id_rsa"
 }
 
 
