@@ -2,6 +2,9 @@
 #openstack_floating_ip_pool = "127.0.0.0/24"
 #openstack_instance_flavor_id = "0"
 #openstack_instance_image_id = "ffffffff-ffff-ffff-ffff-ffffffffff"
+#openstack_instance_name = "some_name"
+#openstack_instance_count = "5" # the number of instances you want to create
+#root_password = "redhat" # the root password on the image you are using
 # PROVIDE THE CONTENT OF YOUR ID_RSA.PUB 
 #openstack_instance_key_pair = "ssh-rsa somehashkeypair-name"
 #openstack_subnet_cidr = "127.0.0.0/24"
