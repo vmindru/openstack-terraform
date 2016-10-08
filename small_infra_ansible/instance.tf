@@ -18,6 +18,11 @@ resource "openstack_compute_instance_v2" "test-vm" {
   security_groups = ["${openstack_compute_secgroup_v2.secgroup01.name}"]
   depends_on = ["openstack_networking_router_v2.rt01","openstack_networking_router_interface_v2.rt01-interface-01"]
 
+  
+  provisioner "local-exec" {
+        command = "grep ${element(openstack_compute_floatingip_v2.test-vm.*.address, count.index)}   ~/.ssh/known_hosts"
+  }
+
   provisioner "remote-exec" {
         inline = [
         "mkdir ~/.ssh",

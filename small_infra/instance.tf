@@ -19,6 +19,9 @@ resource "openstack_compute_instance_v2" "test-vm" {
   depends_on = ["openstack_networking_router_v2.rt01","openstack_networking_router_interface_v2.rt01-interface-01"]
 
 
+  provisioner "local-exec" {
+        command = "grep ${element(openstack_compute_floatingip_v2.test-vm.*.address, count.index)}   ~/.ssh/known_hosts"
+  }
 
 # there are cases where the IMAGE does not come with cloud initi scripts, there for we want to provision the SSH key
   provisioner "remote-exec" {
